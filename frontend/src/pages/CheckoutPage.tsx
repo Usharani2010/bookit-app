@@ -71,7 +71,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     };
 
     // This will create booking AND update slot seats in database
-    const response = await bookingAPI.create(bookingData);
+    await bookingAPI.create(bookingData);
     
     // Redirect to confirmation
     navigate('/confirmation', { 

@@ -5,24 +5,7 @@ import Header from '../components/Header';
 const ConfirmationPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { referenceId, experience, seats, slot, finalAmount } = location.state || {};
-
-  if (!referenceId) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-          <p>No booking found. Please start over.</p>
-          <button 
-            onClick={() => navigate('/')}
-            className="mt-4 bg-[#FFD247] px-6 py-3 rounded-lg font-semibold"
-          >
-            Back to Home
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const { referenceId } = location.state || {};
 
   return (
     <div className="min-h-screen bg-white">
