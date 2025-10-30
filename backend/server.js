@@ -13,12 +13,13 @@ import experienceRoutes from './routes/experiences.js';
 import bookingRoutes from './routes/bookings.js';
 import promoRoutes from './routes/promo.js';
 
-app.disable('x-powered-by');
-
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// ✅ MOVE THIS AFTER app initialization
+app.disable('x-powered-by');
 
 // Middleware
 app.use(cors({
@@ -42,12 +43,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
@@ -63,8 +58,6 @@ app.use('/api/experiences', experienceRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/promo', promoRoutes);
 
-// ... rest of server.js
-
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bookit', {
   useNewUrlParser: true,
@@ -72,8 +65,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bookit', 
 })
 .then(() => console.log('✅ MongoDB connected successfully'))
 .catch((error) => console.log('❌ MongoDB connection error:', error));
-
-// Health check route
 
 // Basic route
 app.get('/', (req, res) => {
