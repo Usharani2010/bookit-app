@@ -1,6 +1,5 @@
-// tailwind.config.cjs
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     './index.html',
     './src/**/*.{ts,tsx,js,jsx}',
@@ -8,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'hd-yellow': '#FFD247', // approx yellow used in design
+        'hd-yellow': '#FFD247',
       },
       borderRadius: {
         '2xl': '1rem',
@@ -16,4 +15,4 @@ module.exports = {
     }
   },
   plugins: [],
-};
+}
