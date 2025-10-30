@@ -13,6 +13,8 @@ import experienceRoutes from './routes/experiences.js';
 import bookingRoutes from './routes/bookings.js';
 import promoRoutes from './routes/promo.js';
 
+app.disable('x-powered-by');
+
 dotenv.config();
 
 const app = express();
@@ -20,18 +22,40 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://bookit-frontend-4f4o.onrender.com', 
-    'https://bookit-frontend.onrender.com'      
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'https://bookit-frontend-4f4o.onrender.com',
+      'https://bookit-frontend.onrender.com'
+    ];
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all for now
+    }
+  },
+  credentials: true
 }));
 app.use(express.json());
 
-// Serve static files from uploads directory - ADD THIS
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'Backend is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
@@ -48,6 +72,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bookit', 
 })
 .then(() => console.log('✅ MongoDB connected successfully'))
 .catch((error) => console.log('❌ MongoDB connection error:', error));
+
+// Health check route
 
 // Basic route
 app.get('/', (req, res) => {
