@@ -30,7 +30,8 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:5173',
       'https://bookit-frontend-4f4o.onrender.com',
-      'https://bookit-frontend.onrender.com'
+      'https://bookit-frontend.onrender.com',
+      'https://bookit-app-lime.vercel.app'
     ];
     
     if (allowedOrigins.indexOf(origin) !== -1) {
