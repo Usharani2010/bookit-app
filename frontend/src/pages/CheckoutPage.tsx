@@ -161,28 +161,30 @@ const handleSubmit = async (e: React.FormEvent) => {
 
 
               {/* Promo Code */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Promo code
-                </label>
-                <div className="flex gap-4">
-                  <input
-                    type="text"
-                    name="promoCode"
-                    value={formData.promoCode}
-                    onChange={handleInputChange}
-                    className="flex-1 px-4 py-2 border  bg-gray-200 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-base"
-                    placeholder="Enter promo code"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleApplyPromo}
-                    className="px-8 py-2 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 text-base min-w-[120px]"
-                  >
-                    Apply
-                  </button>
-                </div>
-              </div>
+              {/* Promo Code */}
+<div>
+  <label className="block text-sm font-medium text-gray-700 mb-3">
+    Promo code
+  </label>
+  <div className="flex flex-col sm:flex-row gap-3">
+    <input
+      type="text"
+      name="promoCode"
+      value={formData.promoCode}
+      onChange={handleInputChange}
+      className="flex-1 px-4 py-3 sm:py-2 border bg-gray-200 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-base"
+      placeholder="Enter promo code"
+    />
+    <button
+      type="button"
+      onClick={handleApplyPromo}
+      className="px-6 py-3 sm:py-2 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 text-base sm:min-w-[120px] w-full sm:w-auto"
+    >
+      Apply
+    </button>
+  </div>
+</div>
+              
 
               {/* Terms Checkbox */}
               <div className="flex items-start gap-3">
