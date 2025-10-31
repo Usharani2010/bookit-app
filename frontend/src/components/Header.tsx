@@ -41,11 +41,11 @@ const Header: React.FC<HeaderProps> = ({ searchTerm = '', onSearchChange }) => {
                 placeholder="Search experiences"
               />
               <button 
-                type="submit"
-                className="rounded-lg px-6 py-3 bg-[#FFD247] font-semibold text-gray-900 hover:brightness-95 flex-shrink-0"
-              >
-                Search
-              </button>
+  type="submit"
+  className="rounded-lg px-4 py-3 sm:px-6 bg-[#FFD247] font-semibold text-gray-900 hover:brightness-95 flex-shrink-0 text-sm sm:text-base"
+>
+  Search
+</button>
             </form>
           </div>
         )}
